@@ -4,12 +4,16 @@ node {
     }
     stage("Building image") {
         dir("employee") {
-            docker.build('rachitsrivastava007/${JOB_NAME}', '-f Dockerfile .')
+            dockerImage = docker.build('rachitsrivastava007/${JOB_NAME}', '-f Dockerfile .')
         }
     }
-    stage("Pushing image to ECR") {
-        docker.withRegistry('', 'rachitsrivastava007') {
-            docker.image('rachitsrivastava007/${JOB_NAME}').push('${BUILD_ID}')
+    stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( '', rachitsrivastava007 ) {
+            dockerImage.push()
+          }
         }
+      }
     }
 }
