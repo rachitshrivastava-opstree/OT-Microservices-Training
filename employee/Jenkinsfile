@@ -26,6 +26,8 @@ pipeline {
     docker.withRegistry('', 'rachitsrivastava007') {
     withCredentials([usernamePassword( credentialsId: 'rachitsrivastava007', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
     sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+    sh "echo ${USERNAME}"
+    sh "echo ${PASSWORD}"
     docker.image('rachitsrivastava007/${JOB_NAME}').push('${BUILD_ID}')
     }
     }
