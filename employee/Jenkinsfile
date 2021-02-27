@@ -17,9 +17,8 @@ pipeline {
     }
     stage('Run docker') {
       steps{
-        docker.image('$registry:$BUILD_NUMBER').withRun('-e CONFIG_FILE=/app/config.yaml') {}
+        sh "docker run -it $registry:$BUILD_NUMBER -e CONFIG_FILE=/app/config.yaml"
       }
     }
-
   }
 }
