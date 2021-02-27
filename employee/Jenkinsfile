@@ -8,8 +8,8 @@ node {
         }
     }
     stage("Pushing image to ECR") {
-        docker.withRegistry('https://rachitsrivastava007', 'rachitsrivastava007') {
-            docker.image('${JOB_NAME}').push('${BUILD_ID}')
+        docker.withRegistry('', 'rachitsrivastava007') {
+            docker.image('rachitsrivastava007/${JOB_NAME}').push('${BUILD_ID}')
         }
     }
 }
