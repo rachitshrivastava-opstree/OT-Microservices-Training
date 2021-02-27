@@ -16,12 +16,14 @@ pipeline {
       }
     }
     stage('Deploy Image') {
+      steps{
       withCredentials([usernamePassword( credentialsId: 'rachitsrivastava007', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
 
        docker.withRegistry('', 'rachitsrivastava007') {
        sh "docker login -u ${USERNAME} -p ${PASSWORD}"
        dockerImage.push("${env.BUILD_NUMBER}")
        dockerImage.push("latest")
+       }
     }
       }
     }
