@@ -23,7 +23,7 @@ pipeline {
        dockerImage.push("latest")        
               }    
            }
-        }
+
     
     stage('Run docker') {
       steps{
