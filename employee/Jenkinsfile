@@ -18,7 +18,7 @@ pipeline {
     stage('Deploy Image') {
       steps{
         script {
-          docker.withRegistry( '', 'rachitsrivastava007' ) {
+          docker.withRegistry( 'https://hub.docker.com', 'rachitsrivastava007' ) {
             sh "docker push $registry:$BUILD_NUMBER"
           }
         }
