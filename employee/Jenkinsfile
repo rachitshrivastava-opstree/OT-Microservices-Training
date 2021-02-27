@@ -16,13 +16,12 @@ pipeline {
       }
     }
     stage('Deploy Image') {
-      steps{
-        script {
-          docker.withRegistry( 'https://hub.docker.com', 'rachitsrivastava007' ) {
-            sh "docker push $registry:$BUILD_NUMBER"
-          }
-        }
-      }
+      withCredentials([usernamePassword( credentialsId: 'rachitsrivastava007', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+
+       docker.withRegistry('', 'rachitsrivastava007') {
+       sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+       dockerImage.push("${env.BUILD_NUMBER}")
+       dockerImage.push("latest")
     }
     stage('Run docker') {
       steps{
