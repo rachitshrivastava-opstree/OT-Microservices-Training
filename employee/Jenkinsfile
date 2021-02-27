@@ -19,7 +19,7 @@ pipeline {
       steps{
         script {
           docker.withRegistry( '', 'rachitsrivastava007' ) {
-            dockerImage.push()
+            sh "docker push $registry:$BUILD_NUMBER"
           }
         }
       }
