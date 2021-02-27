@@ -15,19 +15,11 @@ pipeline {
        }
       }
     }
-    stage('Deploy Image') {
+    stage('Run docker') {
       steps{
-        script {
-          docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-          }
-        }
+        docker.image('$registry:$BUILD_NUMBER').withRun('-e CONFIG_FILE=/app/config.yaml') {}
       }
     }
-    stage('Remove Unused docker image') {
-      steps{
-        sh "docker rmi $registry:$BUILD_NUMBER"
-      }
-    }
+
   }
 }
