@@ -20,7 +20,7 @@ pipeline {
      stage('Deploy Image') {
       steps{
          script {
-            docker.withRegistry( '', rachitsrivastava ) {
+            docker.withRegistry( '', registryCredential ) {
             docker.image('rachitsrivastava007/${JOB_NAME}').push('${BUILD_ID}')
           }
         }
