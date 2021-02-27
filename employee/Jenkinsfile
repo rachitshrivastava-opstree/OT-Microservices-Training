@@ -23,8 +23,8 @@ pipeline {
     * First, the incremental build number from Jenkins
     * Second, the 'latest' tag. */
   script {
-    withCredentials([usernamePassword( credentialsId: 'rachitsrivastava007', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
     docker.withRegistry('', 'rachitsrivastava007') {
+    withCredentials([usernamePassword( credentialsId: 'rachitsrivastava007', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
     sh "docker login -u ${USERNAME} -p ${PASSWORD}"
     docker.image('rachitsrivastava007/${JOB_NAME}').push('${BUILD_ID}')
     }
