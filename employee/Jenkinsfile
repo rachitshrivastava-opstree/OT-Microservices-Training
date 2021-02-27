@@ -17,7 +17,7 @@ pipeline {
     }
     stage('Run docker') {
       steps{
-        sh "docker run -it -e CONFIG_FILE=/app/config.yaml $registry:$BUILD_NUMBER"
+        sh "docker run -d -e CONFIG_FILE=/app/config.yaml $registry:$BUILD_NUMBER"
       }
     }
   }
